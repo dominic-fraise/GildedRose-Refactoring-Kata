@@ -1,5 +1,10 @@
 package com.gildedrose;
 
+
+//magic numbers
+//simplify code
+//extract methods for increase and decrease
+
 class GildedRose {
     Item[] items;
 
