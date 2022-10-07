@@ -58,16 +58,15 @@ class GildedRose {
     }
 
     private void increaseTicketQuality(int i) {
+        if (items[i].quality == MAX_QUALITY) {
+            return;
+        }
         if (items[i].sellIn < 11) {
-            if (items[i].quality < MAX_QUALITY) {
-                items[i].quality = items[i].quality + 1;
-            }
+            items[i].quality = items[i].quality + 1;
         }
 
         if (items[i].sellIn < 6) {
-            if (items[i].quality < MAX_QUALITY) {
-                items[i].quality = items[i].quality + 1;
-            }
+            items[i].quality = items[i].quality + 1;
         }
     }
 }
