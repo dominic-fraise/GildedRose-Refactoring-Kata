@@ -16,19 +16,17 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            if (!items[i].name.equals("Aged Brie")
+            if (!items[i].name.equals("Aged Brie" )
                     && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (items[i].quality > MIN_QUALITY) {
-                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                        items[i].quality = items[i].quality - 1;
-                    }
+                if (items[i].quality > MIN_QUALITY && !items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                    items[i].quality = items[i].quality - 1;
                 }
             } else {
                 if (items[i].quality < MAX_QUALITY) {
                     items[i].quality = items[i].quality + 1;
 
                     if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        increaseTicketQuality(i);
+                        increaseBackstagePassQuality(i);
                     }
                 }
             }
@@ -57,7 +55,7 @@ class GildedRose {
         }
     }
 
-    private void increaseTicketQuality(int i) {
+    private void increaseBackstagePassQuality(int i) {
         if (items[i].quality == MAX_QUALITY) {
             return;
         }
