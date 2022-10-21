@@ -39,21 +39,25 @@ class GildedRose {
             }
 
             if (items[i].sellIn < 0) {
-                if (!items[i].name.equals(AGED_BRIE)) {
-                    if (!items[i].name.equals(BACKSTAGE_PASSES)) {
-                        if (items[i].quality > MIN_QUALITY) {
-                            if (!items[i].name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
-                                items[i].quality--;
-                            }
-                        }
-                    } else {
-                        items[i].quality = 0;
-                    }
-                } else {
-                    if (items[i].quality < MAX_QUALITY) {
-                        items[i].quality++;
+                handleExpiredItem(i);
+            }
+        }
+    }
+
+    private void handleExpiredItem(int i) {
+        if (!items[i].name.equals(AGED_BRIE)) {
+            if (!items[i].name.equals(BACKSTAGE_PASSES)) {
+                if (items[i].quality > MIN_QUALITY) {
+                    if (!items[i].name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
+                        items[i].quality--;
                     }
                 }
+            } else {
+                items[i].quality = 0;
+            }
+        } else {
+            if (items[i].quality < MAX_QUALITY) {
+                items[i].quality++;
             }
         }
     }
