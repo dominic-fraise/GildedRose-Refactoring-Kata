@@ -59,11 +59,9 @@ class GildedRose {
         if (items[i].quality == MAX_QUALITY) {
             return;
         }
-        if (items[i].sellIn < 11) {
-            items[i].quality = items[i].quality + 1;
-        }
-
         if (items[i].sellIn < 6) {
+            items[i].quality = items[i].quality + 2;
+        } else if (items[i].sellIn < 11) {
             items[i].quality = items[i].quality + 1;
         }
     }
