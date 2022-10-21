@@ -57,7 +57,7 @@ class GildedRose {
     }
 
     private void increaseBackstagePassQuality(int i) {
-        if (items[i].quality == MAX_QUALITY) {
+        if (items[i].quality >= MAX_QUALITY) {
             return;
         }
         if (items[i].sellIn < 6) {
