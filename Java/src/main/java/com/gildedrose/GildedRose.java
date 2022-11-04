@@ -21,7 +21,7 @@ class GildedRose {
         for (int i = 0; i < items.length; i++) {
             if (!items[i].name.equals(AGED_BRIE)
                     && !items[i].name.equals(BACKSTAGE_PASSES)) {
-                if (items[i].quality > MIN_QUALITY && !items[i].name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
+                if (qualityCanBeReduced(i) && !items[i].name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
                     items[i].quality--;
                 }
             } else {
@@ -47,7 +47,7 @@ class GildedRose {
     private void handleExpiredItem(int i) {
         if (!items[i].name.equals(AGED_BRIE)) {
             if (!items[i].name.equals(BACKSTAGE_PASSES)) {
-                if (items[i].quality > MIN_QUALITY) {
+                if (qualityCanBeReduced(i)) {
                     if (!items[i].name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
                         items[i].quality--;
                     }
@@ -60,6 +60,10 @@ class GildedRose {
                 items[i].quality++;
             }
         }
+    }
+
+    private boolean qualityCanBeReduced(int i) {
+        return items[i].quality > MIN_QUALITY;
     }
 
     private void increaseBackstagePassQuality(int i) {
