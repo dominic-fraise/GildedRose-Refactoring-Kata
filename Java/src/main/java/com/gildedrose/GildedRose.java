@@ -19,7 +19,7 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            if (!items[i].name.equals(AGED_BRIE)
+            if (!nameIsAgedBrie(i)
                     && !items[i].name.equals(BACKSTAGE_PASSES)) {
                 if (qualityCanBeReduced(i) && !items[i].name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
                     items[i].quality--;
@@ -49,7 +49,7 @@ class GildedRose {
     }
 
     private void handleExpiredItem(int i) {
-        if (!items[i].name.equals(AGED_BRIE)) {
+        if (!nameIsAgedBrie(i)) {
             if (!items[i].name.equals(BACKSTAGE_PASSES)) {
                 if (qualityCanBeReduced(i)) {
                     if (!items[i].name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
@@ -64,6 +64,10 @@ class GildedRose {
                 items[i].quality++;
             }
         }
+    }
+
+    private boolean nameIsAgedBrie(int i) {
+        return items[i].name.equals(AGED_BRIE);
     }
 
     private boolean qualityCanBeReduced(int i) {
