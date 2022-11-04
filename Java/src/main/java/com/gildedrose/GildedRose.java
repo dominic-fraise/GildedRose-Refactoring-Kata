@@ -19,9 +19,9 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            if (!nameIs(i, AGED_BRIE)
-                    && !nameIs(i, BACKSTAGE_PASSES)) {
-                if (qualityCanBeReduced(i) && !nameIs(i, SULFURAS_HAND_OF_RAGNAROS)) {
+            if (nameIsNot(i, AGED_BRIE)
+                    && nameIsNot(i, BACKSTAGE_PASSES)) {
+                if (qualityCanBeReduced(i) && nameIsNot(i, SULFURAS_HAND_OF_RAGNAROS)) {
                     decreaseQuality(i);
                 }
             } else {
@@ -34,7 +34,7 @@ class GildedRose {
                 }
             }
 
-            if (!nameIs(i, SULFURAS_HAND_OF_RAGNAROS)) {
+            if (nameIsNot(i, SULFURAS_HAND_OF_RAGNAROS)) {
                 items[i].sellIn--;
             }
 
@@ -42,6 +42,10 @@ class GildedRose {
                 handleExpiredItem(i);
             }
         }
+    }
+
+    private boolean nameIsNot(int i, String itemName) {
+        return !nameIs(i, itemName);
     }
 
     private int increaseQuality(int i) {
@@ -57,10 +61,10 @@ class GildedRose {
     }
 
     private void handleExpiredItem(int i) {
-        if (!nameIs(i, AGED_BRIE)) {
-            if (!nameIs(i, BACKSTAGE_PASSES)) {
+        if (nameIsNot(i, AGED_BRIE)) {
+            if (nameIsNot(i, BACKSTAGE_PASSES)) {
                 if (qualityCanBeReduced(i)) {
-                    if (!nameIs(i, SULFURAS_HAND_OF_RAGNAROS)) {
+                    if (nameIsNot(i, SULFURAS_HAND_OF_RAGNAROS)) {
                         decreaseQuality(i);
                     }
                 }
