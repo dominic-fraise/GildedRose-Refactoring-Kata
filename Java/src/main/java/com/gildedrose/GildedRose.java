@@ -19,22 +19,22 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            if (!nameIsAgedBrie(i, AGED_BRIE)
-                    && !nameIsAgedBrie(i, BACKSTAGE_PASSES)) {
-                if (qualityCanBeReduced(i) && !nameIsAgedBrie(i, SULFURAS_HAND_OF_RAGNAROS)) {
+            if (!nameIs(i, AGED_BRIE)
+                    && !nameIs(i, BACKSTAGE_PASSES)) {
+                if (qualityCanBeReduced(i) && !nameIs(i, SULFURAS_HAND_OF_RAGNAROS)) {
                     items[i].quality--;
                 }
             } else {
                 if (qualityCanBeIncreased(i)) {
                     items[i].quality++;
 
-                    if (nameIsAgedBrie(i, BACKSTAGE_PASSES)) {
+                    if (nameIs(i, BACKSTAGE_PASSES)) {
                         increaseBackstagePassQuality(i);
                     }
                 }
             }
 
-            if (!nameIsAgedBrie(i, SULFURAS_HAND_OF_RAGNAROS)) {
+            if (!nameIs(i, SULFURAS_HAND_OF_RAGNAROS)) {
                 items[i].sellIn--;
             }
 
@@ -49,10 +49,10 @@ class GildedRose {
     }
 
     private void handleExpiredItem(int i) {
-        if (!nameIsAgedBrie(i, AGED_BRIE)) {
-            if (!nameIsAgedBrie(i, BACKSTAGE_PASSES)) {
+        if (!nameIs(i, AGED_BRIE)) {
+            if (!nameIs(i, BACKSTAGE_PASSES)) {
                 if (qualityCanBeReduced(i)) {
-                    if (!nameIsAgedBrie(i, SULFURAS_HAND_OF_RAGNAROS)) {
+                    if (!nameIs(i, SULFURAS_HAND_OF_RAGNAROS)) {
                         items[i].quality--;
                     }
                 }
@@ -66,7 +66,7 @@ class GildedRose {
         }
     }
 
-    private boolean nameIsAgedBrie(int i, String itemName) {
+    private boolean nameIs(int i, String itemName) {
         return items[i].name.equals(itemName);
     }
 
