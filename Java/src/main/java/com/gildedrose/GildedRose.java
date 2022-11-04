@@ -22,11 +22,11 @@ class GildedRose {
             if (!nameIs(i, AGED_BRIE)
                     && !nameIs(i, BACKSTAGE_PASSES)) {
                 if (qualityCanBeReduced(i) && !nameIs(i, SULFURAS_HAND_OF_RAGNAROS)) {
-                    items[i].quality--;
+                    decreaseQuality(i);
                 }
             } else {
                 if (qualityCanBeIncreased(i)) {
-                    items[i].quality++;
+                    increaseQuality(i);
 
                     if (nameIs(i, BACKSTAGE_PASSES)) {
                         increaseBackstagePassQuality(i);
@@ -44,6 +44,14 @@ class GildedRose {
         }
     }
 
+    private int increaseQuality(int i) {
+        return items[i].quality++;
+    }
+
+    private int decreaseQuality(int i) {
+        return items[i].quality--;
+    }
+
     private boolean qualityCanBeIncreased(int i) {
         return items[i].quality < MAX_QUALITY;
     }
@@ -53,7 +61,7 @@ class GildedRose {
             if (!nameIs(i, BACKSTAGE_PASSES)) {
                 if (qualityCanBeReduced(i)) {
                     if (!nameIs(i, SULFURAS_HAND_OF_RAGNAROS)) {
-                        items[i].quality--;
+                        decreaseQuality(i);
                     }
                 }
             } else {
@@ -61,7 +69,7 @@ class GildedRose {
             }
         } else {
             if (qualityCanBeIncreased(i)) {
-                items[i].quality++;
+                increaseQuality(i);
             }
         }
     }
