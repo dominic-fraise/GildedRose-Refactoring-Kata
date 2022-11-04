@@ -25,7 +25,7 @@ class GildedRose {
                     items[i].quality--;
                 }
             } else {
-                if (items[i].quality < MAX_QUALITY) {
+                if (qualityCanBeIncreased(i)) {
                     items[i].quality++;
 
                     if (items[i].name.equals(BACKSTAGE_PASSES)) {
@@ -44,6 +44,10 @@ class GildedRose {
         }
     }
 
+    private boolean qualityCanBeIncreased(int i) {
+        return items[i].quality < MAX_QUALITY;
+    }
+
     private void handleExpiredItem(int i) {
         if (!items[i].name.equals(AGED_BRIE)) {
             if (!items[i].name.equals(BACKSTAGE_PASSES)) {
@@ -56,7 +60,7 @@ class GildedRose {
                 items[i].quality = 0;
             }
         } else {
-            if (items[i].quality < MAX_QUALITY) {
+            if (qualityCanBeIncreased(i)) {
                 items[i].quality++;
             }
         }
