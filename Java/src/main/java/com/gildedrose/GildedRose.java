@@ -19,22 +19,22 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            if (nameIsNot(i, AGED_BRIE)
-                    && nameIsNot(i, BACKSTAGE_PASSES)) {
-                if (qualityCanBeReduced(i) && nameIsNot(i, SULFURAS_HAND_OF_RAGNAROS)) {
-                    decreaseQuality(i);
+            if (nameIsNot(AGED_BRIE, items[i])
+                    && nameIsNot(BACKSTAGE_PASSES, items[i])) {
+                if (qualityCanBeReduced(i) && nameIsNot(SULFURAS_HAND_OF_RAGNAROS, items[i])) {
+                    decreaseQuality(items[i]);
                 }
             } else {
-                if (qualityCanBeIncreased(i)) {
-                    increaseQuality(i);
+                if (qualityCanBeIncreased(items[i])) {
+                    increaseQuality(items[i]);
 
-                    if (nameIs(i, BACKSTAGE_PASSES)) {
+                    if (nameIs(BACKSTAGE_PASSES, items[i])) {
                         increaseBackstagePassQuality(i);
                     }
                 }
             }
 
-            if (nameIsNot(i, SULFURAS_HAND_OF_RAGNAROS)) {
+            if (nameIsNot(SULFURAS_HAND_OF_RAGNAROS, items[i])) {
                 items[i].sellIn--;
             }
 
@@ -44,42 +44,42 @@ class GildedRose {
         }
     }
 
-    private boolean nameIsNot(int i, String itemName) {
-        return !nameIs(i, itemName);
+    private boolean nameIsNot(String itemName, Item item) {
+        return !nameIs(itemName, item);
     }
 
-    private int increaseQuality(int i) {
-        return items[i].quality++;
+    private int increaseQuality(Item item) {
+        return item.quality++;
     }
 
-    private int decreaseQuality(int i) {
-        return items[i].quality--;
+    private int decreaseQuality(Item item) {
+        return item.quality--;
     }
 
-    private boolean qualityCanBeIncreased(int i) {
-        return items[i].quality < MAX_QUALITY;
+    private boolean qualityCanBeIncreased(Item item) {
+        return item.quality < MAX_QUALITY;
     }
 
     private void handleExpiredItem(int i) {
-        if (nameIsNot(i, AGED_BRIE)) {
-            if (nameIsNot(i, BACKSTAGE_PASSES)) {
+        if (nameIsNot(AGED_BRIE, items[i])) {
+            if (nameIsNot(BACKSTAGE_PASSES, items[i])) {
                 if (qualityCanBeReduced(i)) {
-                    if (nameIsNot(i, SULFURAS_HAND_OF_RAGNAROS)) {
-                        decreaseQuality(i);
+                    if (nameIsNot(SULFURAS_HAND_OF_RAGNAROS, items[i])) {
+                        decreaseQuality(items[i]);
                     }
                 }
             } else {
                 items[i].quality = 0;
             }
         } else {
-            if (qualityCanBeIncreased(i)) {
-                increaseQuality(i);
+            if (qualityCanBeIncreased(items[i])) {
+                increaseQuality(items[i]);
             }
         }
     }
 
-    private boolean nameIs(int i, String itemName) {
-        return items[i].name.equals(itemName);
+    private boolean nameIs(String itemName, Item item) {
+        return item.name.equals(itemName);
     }
 
     private boolean qualityCanBeReduced(int i) {
