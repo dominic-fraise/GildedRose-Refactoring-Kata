@@ -19,18 +19,18 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            if (nameIsNot(AGED_BRIE, item)
-                && nameIsNot(BACKSTAGE_PASSES, item)) {
-                if (qualityCanBeReduced(item) && nameIsNot(SULFURAS_HAND_OF_RAGNAROS, item)) {
-                    decreaseQuality(item);
-                }
-            } else {
+            if (nameIs(AGED_BRIE, item)
+                || nameIs(BACKSTAGE_PASSES, item)) {
                 if (qualityCanBeIncreased(item)) {
                     increaseQuality(item);
 
                     if (nameIs(BACKSTAGE_PASSES, item)) {
                         increaseBackstagePassQuality(item);
                     }
+                }
+            } else {
+                if (qualityCanBeReduced(item) && nameIsNot(SULFURAS_HAND_OF_RAGNAROS, item)) {
+                    decreaseQuality(item);
                 }
             }
 
