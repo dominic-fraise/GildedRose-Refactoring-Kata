@@ -47,10 +47,8 @@ class GildedRose {
                     if (qualityCanBeIncreased(item)) {
                         increaseQuality(item);
                     }
-                } else if (qualityCanBeReduced(item)) {
-                    if (nameIsNot(SULFURAS_HAND_OF_RAGNAROS, item)) {
-                        decreaseQuality(item);
-                    }
+                } else if (qualityCanBeReduced(item) && nameIsNot(SULFURAS_HAND_OF_RAGNAROS, item)) {
+                    decreaseQuality(item);
                 }
             }
         }
