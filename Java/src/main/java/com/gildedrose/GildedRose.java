@@ -17,6 +17,9 @@ class GildedRose {
         this.items = items;
     }
 
+    // TODO:
+    // - OOP
+
     public void updateQuality() {
         for (Item item : items) {
             if (nameIs(AGED_BRIE, item)) {
