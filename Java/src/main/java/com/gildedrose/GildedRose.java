@@ -40,6 +40,9 @@ class GildedRose {
             }
 
             if (item.sellIn < 0) {
+                if (nameIs(BACKSTAGE_PASSES, item)) {
+                    item.quality = 0;
+                }
                 if (nameIsNot(AGED_BRIE, item)) {
                     if (nameIsNot(BACKSTAGE_PASSES, item)) {
                         if (qualityCanBeReduced(item)) {
@@ -47,8 +50,6 @@ class GildedRose {
                                 decreaseQuality(item);
                             }
                         }
-                    } else {
-                        item.quality = 0;
                     }
                 } else {
                     if (qualityCanBeIncreased(item)) {
