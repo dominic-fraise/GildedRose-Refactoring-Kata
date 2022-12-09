@@ -47,14 +47,9 @@ class GildedRose {
                     if (qualityCanBeIncreased(item)) {
                         increaseQuality(item);
                     }
-                }
-                if (nameIsNot(AGED_BRIE, item)) {
-                    if (nameIsNot(BACKSTAGE_PASSES, item)) {
-                        if (qualityCanBeReduced(item)) {
-                            if (nameIsNot(SULFURAS_HAND_OF_RAGNAROS, item)) {
-                                decreaseQuality(item);
-                            }
-                        }
+                } else if (qualityCanBeReduced(item)) {
+                    if (nameIsNot(SULFURAS_HAND_OF_RAGNAROS, item)) {
+                        decreaseQuality(item);
                     }
                 }
             }
