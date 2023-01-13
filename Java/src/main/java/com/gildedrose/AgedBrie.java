@@ -12,29 +12,18 @@ public class AgedBrie extends Item {
     }
 
     public void adjustQuality() {
-        if (nameIs(GildedRose.AGED_BRIE)) {
-            if (qualityCanBeIncreased()) {
-                increaseQuality();
-            }
+        if (qualityCanBeIncreased()) {
+            increaseQuality();
         }
     }
 
     public void decreaseSellIn() {
-        if (nameIsNot(GildedRose.SULFURAS_HAND_OF_RAGNAROS)) {
-            sellIn--;
-        }
+        sellIn--;
     }
 
     public void handleExpiredItems() {
-        if (nameIs(GildedRose.BACKSTAGE_PASSES)) {
-            quality = 0;
-        }
-        if (nameIs(GildedRose.AGED_BRIE)) {
-            if (qualityCanBeIncreased()) {
-                increaseQuality();
-            }
-        } else if (qualityCanBeReduced() && nameIsNot(GildedRose.SULFURAS_HAND_OF_RAGNAROS)) {
-            decreaseQuality();
+        if (qualityCanBeIncreased()) {
+            increaseQuality();
         }
     }
 
@@ -48,17 +37,6 @@ public class AgedBrie extends Item {
 
     public int increaseQuality() {
         return quality++;
-    }
-
-    public void increaseBackstagePassQuality() {
-        if (quality >= GildedRose.MAX_QUALITY) {
-            return;
-        }
-        if (sellIn < 6) {
-            quality += 2;
-        } else if (sellIn < 11) {
-            quality += 1;
-        }
     }
 
     public boolean qualityCanBeReduced() {
