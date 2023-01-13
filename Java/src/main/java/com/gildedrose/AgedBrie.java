@@ -17,16 +17,6 @@ public class AgedBrie extends Item {
                 increaseQuality();
             }
         }
-        else if (nameIs(GildedRose.BACKSTAGE_PASSES)) {
-            if (qualityCanBeIncreased()) {
-                increaseQuality();
-                increaseBackstagePassQuality();
-            }
-        } else {
-            if (qualityCanBeReduced() && nameIsNot(GildedRose.SULFURAS_HAND_OF_RAGNAROS)) {
-                decreaseQuality();
-            }
-        }
     }
 
     public void decreaseSellIn() {
