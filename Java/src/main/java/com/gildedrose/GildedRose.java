@@ -22,38 +22,50 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            if (nameIs(AGED_BRIE, item)) {
-                if (qualityCanBeIncreased(item)) {
-                    increaseQuality(item);
-                }
-            }
-            else if (nameIs(BACKSTAGE_PASSES, item)) {
-                if (qualityCanBeIncreased(item)) {
-                    increaseQuality(item);
-                    increaseBackstagePassQuality(item);
-                }
-            } else {
-                if (qualityCanBeReduced(item) && nameIsNot(SULFURAS_HAND_OF_RAGNAROS, item)) {
-                    decreaseQuality(item);
-                }
-            }
+            adjustQuality(item);
 
-            if (nameIsNot(SULFURAS_HAND_OF_RAGNAROS, item)) {
-                item.sellIn--;
-            }
+            decreaseSellIn(item);
 
             if (item.sellIn < 0) {
-                if (nameIs(BACKSTAGE_PASSES, item)) {
-                    item.quality = 0;
-                }
-                if (nameIs(AGED_BRIE, item)) {
-                    if (qualityCanBeIncreased(item)) {
-                        increaseQuality(item);
-                    }
-                } else if (qualityCanBeReduced(item) && nameIsNot(SULFURAS_HAND_OF_RAGNAROS, item)) {
-                    decreaseQuality(item);
-                }
+                handleExpiredItems(item);
             }
+        }
+    }
+
+    private void adjustQuality(Item item) {
+        if (nameIs(AGED_BRIE, item)) {
+            if (qualityCanBeIncreased(item)) {
+                increaseQuality(item);
+            }
+        }
+        else if (nameIs(BACKSTAGE_PASSES, item)) {
+            if (qualityCanBeIncreased(item)) {
+                increaseQuality(item);
+                increaseBackstagePassQuality(item);
+            }
+        } else {
+            if (qualityCanBeReduced(item) && nameIsNot(SULFURAS_HAND_OF_RAGNAROS, item)) {
+                decreaseQuality(item);
+            }
+        }
+    }
+
+    private void handleExpiredItems(Item item) {
+        if (nameIs(BACKSTAGE_PASSES, item)) {
+            item.quality = 0;
+        }
+        if (nameIs(AGED_BRIE, item)) {
+            if (qualityCanBeIncreased(item)) {
+                increaseQuality(item);
+            }
+        } else if (qualityCanBeReduced(item) && nameIsNot(SULFURAS_HAND_OF_RAGNAROS, item)) {
+            decreaseQuality(item);
+        }
+    }
+
+    private void decreaseSellIn(Item item) {
+        if (nameIsNot(SULFURAS_HAND_OF_RAGNAROS, item)) {
+            item.sellIn--;
         }
     }
 
