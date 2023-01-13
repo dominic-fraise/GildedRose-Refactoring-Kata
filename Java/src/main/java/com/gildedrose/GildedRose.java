@@ -22,78 +22,41 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            adjustQuality(item);
+            item.adjustQuality(this);
 
-            decreaseSellIn(item);
+            item.decreaseSellIn(this);
 
             if (item.sellIn < 0) {
-                handleExpiredItems(item);
+                item.handleExpiredItems(this);
             }
         }
     }
 
-    private void adjustQuality(Item item) {
-        if (nameIs(AGED_BRIE, item)) {
-            if (qualityCanBeIncreased(item)) {
-                increaseQuality(item);
-            }
-        }
-        else if (nameIs(BACKSTAGE_PASSES, item)) {
-            if (qualityCanBeIncreased(item)) {
-                increaseQuality(item);
-                increaseBackstagePassQuality(item);
-            }
-        } else {
-            if (qualityCanBeReduced(item) && nameIsNot(SULFURAS_HAND_OF_RAGNAROS, item)) {
-                decreaseQuality(item);
-            }
-        }
-    }
-
-    private void handleExpiredItems(Item item) {
-        if (nameIs(BACKSTAGE_PASSES, item)) {
-            item.quality = 0;
-        }
-        if (nameIs(AGED_BRIE, item)) {
-            if (qualityCanBeIncreased(item)) {
-                increaseQuality(item);
-            }
-        } else if (qualityCanBeReduced(item) && nameIsNot(SULFURAS_HAND_OF_RAGNAROS, item)) {
-            decreaseQuality(item);
-        }
-    }
-
-    private void decreaseSellIn(Item item) {
-        if (nameIsNot(SULFURAS_HAND_OF_RAGNAROS, item)) {
-            item.sellIn--;
-        }
-    }
-
-    private boolean nameIsNot(String itemName, Item item) {
+    public boolean nameIsNot(String itemName, Item item) {
         return !nameIs(itemName, item);
     }
 
-    private int increaseQuality(Item item) {
+    public int increaseQuality(Item item) {
         return item.quality++;
     }
 
-    private int decreaseQuality(Item item) {
+    public int decreaseQuality(Item item) {
         return item.quality--;
     }
 
-    private boolean qualityCanBeIncreased(Item item) {
+    public boolean qualityCanBeIncreased(Item item) {
         return item.quality < MAX_QUALITY;
     }
 
-    private boolean nameIs(String itemName, Item item) {
+    public boolean nameIs(String itemName, Item item) {
         return item.name.equals(itemName);
     }
 
-    private boolean qualityCanBeReduced(Item item) {
+    public boolean qualityCanBeReduced(Item item) {
         return item.quality > MIN_QUALITY;
     }
 
-    private void increaseBackstagePassQuality(Item item) {
+    public void increaseBackstagePassQuality(Item item) {
         if (item.quality >= MAX_QUALITY) {
             return;
         }
