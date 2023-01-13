@@ -20,39 +20,74 @@ public class Item {
     }
 
     public void adjustQuality(GildedRose gildedRose) {
-        if (gildedRose.nameIs(GildedRose.AGED_BRIE, this)) {
-            if (gildedRose.qualityCanBeIncreased(this)) {
-                gildedRose.increaseQuality(this);
+        if (nameIs(GildedRose.AGED_BRIE)) {
+            if (qualityCanBeIncreased()) {
+                increaseQuality();
             }
         }
-        else if (gildedRose.nameIs(GildedRose.BACKSTAGE_PASSES, this)) {
-            if (gildedRose.qualityCanBeIncreased(this)) {
-                gildedRose.increaseQuality(this);
-                gildedRose.increaseBackstagePassQuality(this);
+        else if (nameIs(GildedRose.BACKSTAGE_PASSES)) {
+            if (qualityCanBeIncreased()) {
+                increaseQuality();
+                increaseBackstagePassQuality();
             }
         } else {
-            if (gildedRose.qualityCanBeReduced(this) && gildedRose.nameIsNot(GildedRose.SULFURAS_HAND_OF_RAGNAROS, this)) {
-                gildedRose.decreaseQuality(this);
+            if (qualityCanBeReduced() && nameIsNot(GildedRose.SULFURAS_HAND_OF_RAGNAROS)) {
+                decreaseQuality();
             }
         }
     }
 
     public void decreaseSellIn(GildedRose gildedRose) {
-        if (gildedRose.nameIsNot(GildedRose.SULFURAS_HAND_OF_RAGNAROS, this)) {
+        if (nameIsNot(GildedRose.SULFURAS_HAND_OF_RAGNAROS)) {
             sellIn--;
         }
     }
 
     public void handleExpiredItems(GildedRose gildedRose) {
-        if (gildedRose.nameIs(GildedRose.BACKSTAGE_PASSES, this)) {
+        if (nameIs(GildedRose.BACKSTAGE_PASSES)) {
             quality = 0;
         }
-        if (gildedRose.nameIs(GildedRose.AGED_BRIE, this)) {
-            if (gildedRose.qualityCanBeIncreased(this)) {
-                gildedRose.increaseQuality(this);
+        if (nameIs(GildedRose.AGED_BRIE)) {
+            if (qualityCanBeIncreased()) {
+                increaseQuality();
             }
-        } else if (gildedRose.qualityCanBeReduced(this) && gildedRose.nameIsNot(GildedRose.SULFURAS_HAND_OF_RAGNAROS, this)) {
-            gildedRose.decreaseQuality(this);
+        } else if (qualityCanBeReduced() && nameIsNot(GildedRose.SULFURAS_HAND_OF_RAGNAROS)) {
+            decreaseQuality();
         }
+    }
+
+    public boolean nameIs(String itemName) {
+        return name.equals(itemName);
+    }
+
+    public boolean qualityCanBeIncreased() {
+        return quality < GildedRose.MAX_QUALITY;
+    }
+
+    public int increaseQuality() {
+        return quality++;
+    }
+
+    public void increaseBackstagePassQuality() {
+        if (quality >= GildedRose.MAX_QUALITY) {
+            return;
+        }
+        if (sellIn < 6) {
+            quality += 2;
+        } else if (sellIn < 11) {
+            quality += 1;
+        }
+    }
+
+    public boolean qualityCanBeReduced() {
+        return quality > GildedRose.MIN_QUALITY;
+    }
+
+    public boolean nameIsNot(String itemName) {
+        return !nameIs(itemName);
+    }
+
+    public int decreaseQuality() {
+        return quality--;
     }
 }

@@ -32,38 +32,4 @@ class GildedRose {
         }
     }
 
-    public boolean nameIsNot(String itemName, Item item) {
-        return !nameIs(itemName, item);
-    }
-
-    public int increaseQuality(Item item) {
-        return item.quality++;
-    }
-
-    public int decreaseQuality(Item item) {
-        return item.quality--;
-    }
-
-    public boolean qualityCanBeIncreased(Item item) {
-        return item.quality < MAX_QUALITY;
-    }
-
-    public boolean nameIs(String itemName, Item item) {
-        return item.name.equals(itemName);
-    }
-
-    public boolean qualityCanBeReduced(Item item) {
-        return item.quality > MIN_QUALITY;
-    }
-
-    public void increaseBackstagePassQuality(Item item) {
-        if (item.quality >= MAX_QUALITY) {
-            return;
-        }
-        if (item.sellIn < 6) {
-            item.quality += 2;
-        } else if (item.sellIn < 11) {
-            item.quality += 1;
-        }
-    }
 }
