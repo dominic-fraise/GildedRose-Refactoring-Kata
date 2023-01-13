@@ -19,7 +19,7 @@ public class Item {
         return this.name + ", " + this.sellIn + ", " + this.quality;
     }
 
-    public void adjustQuality(GildedRose gildedRose) {
+    public void adjustQuality() {
         if (nameIs(GildedRose.AGED_BRIE)) {
             if (qualityCanBeIncreased()) {
                 increaseQuality();
@@ -37,13 +37,13 @@ public class Item {
         }
     }
 
-    public void decreaseSellIn(GildedRose gildedRose) {
+    public void decreaseSellIn() {
         if (nameIsNot(GildedRose.SULFURAS_HAND_OF_RAGNAROS)) {
             sellIn--;
         }
     }
 
-    public void handleExpiredItems(GildedRose gildedRose) {
+    public void handleExpiredItems() {
         if (nameIs(GildedRose.BACKSTAGE_PASSES)) {
             quality = 0;
         }

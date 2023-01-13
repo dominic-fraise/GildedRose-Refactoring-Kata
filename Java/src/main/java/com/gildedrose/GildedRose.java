@@ -22,12 +22,12 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            item.adjustQuality(this);
+            item.adjustQuality();
 
-            item.decreaseSellIn(this);
+            item.decreaseSellIn();
 
             if (item.sellIn < 0) {
-                item.handleExpiredItems(this);
+                item.handleExpiredItems();
             }
         }
     }
